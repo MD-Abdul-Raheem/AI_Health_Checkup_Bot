@@ -1,0 +1,5 @@
+{
+  "name": "HealthChat Assist",
+  "description": "An AI-powered health assistant providing preliminary advice based on symptoms.",
+  "requestFramePermissions": []
+}
