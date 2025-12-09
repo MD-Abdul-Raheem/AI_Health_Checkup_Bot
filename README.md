@@ -1,99 +1,159 @@
-                                     HEALTHCHAT ASSIST
-                              Technical Abstract & Documentation
+# 🏥 HealthChat Assist
 
-1. INTRODUCTION
-========================================================================
-HealthChat Assist is a modern, Single Page Application (SPA) developed to act 
-as an intelligent, first-line digital health assistant. 
+> AI-powered health assistant providing preliminary symptom analysis, medication suggestions, and health guidance.
 
-It leverages Google's Generative AI (Gemini 2.5 Flash) to analyze user-reported 
-symptoms and provide structured, preliminary health guidance. The goal is to 
-democratize access to basic health information, offering users immediate 
-insights into possible conditions, over-the-counter medications, and safe 
-home-care tips.
+[![React](https://img.shields.io/badge/React-19-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.2-purple.svg)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC.svg)](https://tailwindcss.com/)
 
+## 📋 Overview
 
-2. TECHNOLOGY STACK
-========================================================================
-The project utilizes a cutting-edge, type-safe web stack optimized for 
-performance and maintainability.
+HealthChat Assist is a modern Single Page Application (SPA) that acts as an intelligent, first-line digital health assistant. It leverages Google's Generative AI (Gemini 2.5 Flash) to analyze user-reported symptoms and provide structured, preliminary health guidance.
 
-  [ Frontend Framework ]
-  - React 19: Uses the latest React features for a responsive, component-based 
-    architecture.
+### ✨ Key Features
 
-  [ Language ]
-  - TypeScript: Ensures code reliability, strict typing, and easier refactoring.
+- 🤖 **AI-Powered Analysis** - Uses Google Gemini 2.5 Flash for intelligent symptom analysis
+- 📱 **Fully Responsive** - Optimized for mobile, tablet, and desktop devices
+- 🎯 **Interactive Pain Scale** - Visual pain intensity selector (Low, Normal, High)
+- 💊 **Real Medication Suggestions** - Provides actual OTC brand names and generic alternatives
+- ⚡ **Real-time Chat Interface** - Conversational UI with instant feedback
+- 🛡️ **Safety First** - Built-in disclaimers and professional consultation prompts
 
-  [ Styling & UI ]
-  - Tailwind CSS: Implements a utility-first styling approach.
-  - Theme: Custom "Medical Teal" (HSL-based) for a professional, calming aesthetic.
+## 🚀 Quick Start
 
-  [ Artificial Intelligence ]
-  - Google Gemini API (@google/genai): The core intelligence engine.
-  - Model: gemini-2.5-flash.
-  - Configuration: set with a low temperature (0.1) and strict JSON schema 
-    to ensure factual, structured output acting as a "Clinical Pharmacist."
+### Prerequisites
 
-  [ Navigation ]
-  - React Router DOM: Handles smooth client-side routing between pages.
+- Node.js (v18 or higher)
+- npm or yarn
+- Google Gemini API Key ([Get one here](https://makersuite.google.com/app/apikey))
 
+### Installation
 
-3. SYSTEM ARCHITECTURE & WORKFLOW
-========================================================================
-The application operates on a linear, event-driven workflow designed to mimic 
-a professional medical consultation.
+```bash
+# Clone the repository
+git clone https://github.com/MD-Abdul-Raheem/AI_Health_Checkup_Bot.git
+cd AI_Health_Checkup_Bot
 
-  Step A: Symptom Intake
-  ----------------------
-  The user enters symptoms in natural language. The interface then dynamically 
-  reveals a "Pain Radius Bar," allowing the user to visually select intensity 
-  (Low, Normal, High). This multi-step input ensures the AI has adequate context.
+# Install dependencies
+npm install
 
-  Step B: AI Processing
-  ---------------------
-  The frontend constructs a prompt combining the symptom text and pain level. 
-  This is sent to the Gemini API with a system instruction that:
-    1. Enforces a specific JSON output structure.
-    2. Validates that suggested medications are real, commercially available 
-       OTC products (Brand/Generic).
-    3. Filters out prescription-only advice, replacing it with a referral 
-       to see a doctor.
+# Create environment file
+copy .env.example .env
 
-  Step C: Response Rendering
-  --------------------------
-  The AI's response is parsed and displayed in a staggered, conversational 
-  sequence to reduce cognitive load:
-    1. "Possible Conditions"
-    2. "Suggested Medications" (with disclaimers)
-    3. "Precautionary Tips"
+# Add your Gemini API key to .env
+# GEMINI_API_KEY=your_api_key_here
 
+# Start development server
+npm run dev
+```
 
-4. KEY FEATURES & ADVANTAGES
-========================================================================
-  
-  + Structured Intelligence
-    Unlike standard chatbots that return blocks of text, HealthChat Assist 
-    categorizes data into strict UI elements (lists, bullet points), making 
-    information easy to digest.
+The app will be available at `http://localhost:3000`
 
-  + Real-World Medication Data
-    The AI is prompt-engineered to function as a pharmacist, ensuring it suggests 
-    actual brand names (e.g., "Advil", "Tylenol") rather than generic chemical 
-    compounds only, improving usability for the layperson.
+## 🛠️ Tech Stack
 
-  + Safety First
-    Strict guardrails prevent the AI from making definitive diagnoses or 
-    suggesting prescription drugs, adhering to responsible AI practices in healthcare.
+| Technology | Purpose |
+|------------|----------|
+| **React 19** | UI framework with latest features |
+| **TypeScript** | Type-safe development |
+| **Vite** | Fast build tool and dev server |
+| **Tailwind CSS** | Utility-first styling |
+| **Google Gemini API** | AI-powered symptom analysis |
+| **React Router DOM** | Client-side routing |
 
-  + Interactive UX
-    The application features a polished UI with animations, a visual pain scale, 
-    and instant feedback mechanisms.
+## 📁 Project Structure
 
+```
+├── components/
+│   ├── Button.tsx          # Reusable button component
+│   └── Header.tsx          # Navigation header with mobile menu
+├── pages/
+│   ├── Home.tsx            # Landing page
+│   ├── Chat.tsx            # Main chat interface
+│   └── About.tsx           # About page
+├── services/
+│   └── genaiService.ts     # Gemini API integration
+├── App.tsx                 # Main app component
+├── index.tsx               # Entry point
+├── types.ts                # TypeScript type definitions
+└── vite.config.ts          # Vite configuration
+```
 
-5. DISCLAIMER
-========================================================================
-This application is a demonstration of AI capabilities in the health domain. 
-It is NOT a replacement for professional medical advice. Users are explicitly 
-warned to consult healthcare professionals for diagnoses and treatments.
-************************************************************************
+## 🎯 How It Works
+
+### 1. Symptom Intake
+User describes symptoms in natural language, then selects pain intensity using an interactive visual scale.
+
+### 2. AI Processing
+The app sends symptoms and pain level to Google Gemini API with specific instructions to:
+- Analyze symptoms as a "Clinical Pharmacist"
+- Suggest only real, commercially available OTC medications
+- Provide safety disclaimers
+- Recommend professional consultation when needed
+
+### 3. Response Display
+Results are displayed in a structured, easy-to-read format:
+- **Possible Conditions** - Preliminary assessment
+- **Medication Suggestions** - OTC options with brand names
+- **Precautionary Tips** - Home care recommendations
+
+## 📱 Responsive Design
+
+Optimized for all screen sizes:
+- 📱 Mobile: < 640px
+- 📱 Tablet: 640px - 768px
+- 💻 Laptop: 768px - 1024px
+- 🖥️ Desktop: 1024px+
+
+## 🔧 Available Scripts
+
+```bash
+# Development server
+npm run dev
+
+# Production build
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## ⚙️ Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+## 🚨 Important Disclaimer
+
+⚠️ **This application is for demonstration purposes only.**
+
+- NOT a replacement for professional medical advice
+- NOT for emergency medical situations
+- Always consult qualified healthcare providers for diagnoses and treatment
+- Call emergency services immediately for medical emergencies
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 👨💻 Author
+
+**MD Abdul Raheem**
+- GitHub: [@MD-Abdul-Raheem](https://github.com/MD-Abdul-Raheem)
+
+## 🙏 Acknowledgments
+
+- Google Gemini AI for powering the intelligence
+- React team for the amazing framework
+- Tailwind CSS for the styling system
+
+---
+
+**Made with ❤️ for better health information accessibility**
