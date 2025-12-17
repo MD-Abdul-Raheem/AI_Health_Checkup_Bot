@@ -4,12 +4,11 @@ import { AnalyzeSymptomsOutput } from "../types";
 
 
 export const analyzeSymptoms = async (input: string): Promise<AnalyzeSymptomsOutput> => {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' && process.env?.VITE_GEMINI_API_KEY);
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   if (!apiKey) {
-    console.error("API Key missing. Check Vercel environment variables.");
-    throw new Error("API Key not found");
+    console.error("API Key missing. Ensure VITE_GEMINI_API_KEY is set in Vercel.");
+    throw new Error("API Key not configured");
   }
-  console.log("API Key found:", apiKey.substring(0, 10) + "...");
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
