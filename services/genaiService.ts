@@ -72,11 +72,8 @@ export const analyzeSymptoms = async (input: string): Promise<AnalyzeSymptomsOut
 
   } catch (error) {
     console.error("Error analyzing symptoms:", error);
-    // Fallback in case of parsing error or API failure
-    return {
-      possibleConditions: "I'm having trouble analyzing your specific symptoms right now. Please consult a medical professional.",
-      medicationSuggestions: ["Consult a pharmacist for specific recommendations"],
-      precautionaryTips: ["Rest", "Stay hydrated", "Monitor symptoms"],
-    };
+    console.error("API Key present:", !!apiKey);
+    console.error("Error details:", JSON.stringify(error, null, 2));
+    throw error;
   }
 };
