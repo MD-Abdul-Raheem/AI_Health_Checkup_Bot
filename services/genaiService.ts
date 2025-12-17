@@ -9,14 +9,20 @@ export const analyzeSymptoms = async (input: string): Promise<AnalyzeSymptomsOut
     });
 
     if (!response.ok) {
-      throw new Error('API request failed');
+      const errorData = await response.json().catch(() => ({}));
+      console.error('API Error:', response.status, errorData);
+      throw new Error(`API request failed: ${response.status}`);
     }
 
     const data = await response.json();
     return data as AnalyzeSymptomsOutput;
 
   } catch (error) {
-    console.error("Error:", error);
-    throw error;
+    console.error("Error calling API:", error);
+    return {
+      possibleConditions: "Unable to analyze symptoms. Please consult a medical professional.",
+      medicationSuggestions: ["Consult a pharmacist"],
+      precautionaryTips: ["Rest", "Stay hydrated", "Monitor symptoms"],
+    };
   }
 };
